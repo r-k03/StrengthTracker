@@ -23,11 +23,6 @@ A full-stack fitness application that allows users to record their workout logs 
 - **MongoDB** - NoSQL database for data storage
 - **Mongoose** - MongoDB object modeling
 
-### Security & Authentication
-- **JWT (JSON Web Tokens)** - Session authentication
-- **bcrypt** - Password hashing
-- **Upstash Redis** - Rate limiting and API protection
-
 ## Usage
 
 1. Register a new account or login with existing credentials
