@@ -13,7 +13,7 @@ const CreateLog = ({date}) => {
   return (
     <>
     <div style={{padding: "1rem", alignItems: "center", display:"flex"}}>
-      <Link to="/login">
+      <Link to="/home">
         <ArrowLeft size="50"/>
       </Link>
       <span style={{transform: "translateY(-3.5px)"}}>Back To Home Page</span>
