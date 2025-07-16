@@ -4,28 +4,32 @@ import { useNavigate, Link } from 'react-router';
 
 const Register = () => {
 
-    async function handleRegister(event) {
+    const navigate = useNavigate();
 
-        const navigate = useNavigate();
+    async function handleRegister(event) {
+        console.log("submitting");
 
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
+        const form = event.currentTarget;
+        const formData = new FormData(form);
         const email = formData.get("email");
         const password = formData.get("password");
+        console.log(password);
+        console.log(formData.get("dupPassword"));
         if (password !== formData.get("dupPassword")) {
             // toast message
+            console.log("returning");
             return;
         }
         const requestBody = {email, password};
-        const response = await axios.post("localhost:5000/api/account/register", requestBody, {
+        console.log(`Sending registration: ${requestBody}`);
+        const response = await axios.post("http://localhost:5000/api/account/register", requestBody, {
             withCredentials: true
         });
-        event.reset();
+        form.reset();
         if (response.status === 201) {
             navigate('/login');
         }
-
-
     }
 
   return (
@@ -37,15 +41,15 @@ const Register = () => {
             <form onSubmit={handleRegister}>
                 {/* Labels and inputs for form data */}
                 <label>Email: </label>
-                <input type="email" maxlength="254" required/>
+                <input type="email" name="email" maxLength="254" required/>
 
                 <label>Password: </label>
-                <input type="password" maxlength="30" required/>
+                <input type="password" name="password" maxLength="30" required/>
 
                 <label>Re-Enter Password: </label>
                 <input type="password" name="dupPassword" maxLength="30" required/>
 
-                <button>Register</button>
+                <button type="submit">Register</button>
             </form>
             <p>Already have an account?<Link to={'/login'}>Sign in</Link></p>
         </div>

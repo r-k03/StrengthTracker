@@ -11,7 +11,7 @@ function Login(){
             const password = formData.get("password");
             const requestBody = {email, password}
             console.log(requestBody);
-            const response = await axios.post('localhost:5000/api/account/login', requestBody, {
+            const response = await axios.post('http://localhost:5000/api/account/login', requestBody, {
                 withCredentials: true,
             })
             if (response.status === 200) {

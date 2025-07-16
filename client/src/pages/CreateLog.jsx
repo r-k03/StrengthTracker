@@ -1,12 +1,29 @@
-import React from 'react'
+import { useEffect } from 'react'
 import {ArrowLeft} from 'lucide-react'
-import {Link} from 'react-router'
+import {Link, useNavigate} from 'react-router'
 import axios from 'axios'
 
 const CreateLog = ({date}) => {
 
   console.log(`${date}`);
-  date = new Date();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    console.log("verifying");
+    const verifyUser = async () => {
+      try {
+        const _ = await axios.get("http://localhost:5000/api/verify", {
+        withCredentials: true
+      });
+      console.log("user verified");
+      } catch {
+        // toast
+      navigate("/login");
+      }      
+    }
+    verifyUser();
+  }, []);
 
   async function onCreateLog(formData) {
     const exercise = formData.get("exercise");
@@ -16,7 +33,7 @@ const CreateLog = ({date}) => {
     const isoDate = date.toISOString();
     const requestBody = {exercise,sets,reps,comments, date: isoDate}
     try {
-      const response = await axios.post("localhost:5000/api/logs", requestBody, {
+      const response = await axios.post("http://localhost:5000/api/logs", requestBody, {
         withCredentials: true
       });
       if (response.status === 201) {

@@ -1,7 +1,7 @@
-import React from 'react'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Plus} from 'lucide-react'
 import Calendar from 'react-calendar'
+import axios from 'axios'
 import { useNavigate } from 'react-router'
 import WorkoutLogItem from './WorkoutLogItem'
 
@@ -19,6 +19,24 @@ const HomePage = ({date, setDate}) => {
       date: '2025-07-15'
     }
   ]);
+
+
+  useEffect(() => {
+      console.log("verifying");
+      const verifyUser = async () => {
+        try {
+          const _ = await axios.get("http://localhost:5000/api/verify", {
+          withCredentials: true
+        });
+        console.log("user verified");
+        } catch (e) {
+          // toast
+          console.log(e);
+        navigate("/login");
+        }      
+      }
+      verifyUser();
+    }, []);
 
   const handleDateChange = (date) => {
     setDate(date);

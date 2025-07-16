@@ -8,6 +8,7 @@ const Account = require('../models/Account');
 router.post('/register', async (req, res) => {
     try {
         const {email, password} = req.body;
+        console.log(`Email and Passowrd are : ${email}, ${password}`);
         const duplicateUser = await Account.findOne({email});
         if (duplicateUser) {
             return res.status(409).json({message: "A User with the Provided Email Already Exists"});
