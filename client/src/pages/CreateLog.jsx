@@ -48,7 +48,8 @@ const CreateLog = ({date}) => {
       console.log(error);
       // toast error
     }
-    return;
+
+    navigate("/home");
   }
 
   return (

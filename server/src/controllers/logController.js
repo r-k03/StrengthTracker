@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 async function getDailyUserLogs(req, res) {
     console.log("Getting");
+    console.log(req.params);
     const date = req.params.date;
     const id = req.userID;
     const queryDate = new Date(date);

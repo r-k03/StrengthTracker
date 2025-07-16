@@ -9,47 +9,50 @@ const HomePage = ({date, setDate}) => {
   const navigate = useNavigate();
   
   // Sample workout logs data
-  const [workoutLogs, setWorkoutLogs] = useState([
-    {
-      _id: 1,
-      exercise: 'Bench Press',
-      sets: 3,
-      reps: 12,
-      comments: 'Felt strong today, increased weight',
-      date: '2025-07-15'
-    }
-  ]);
-
+  const [workoutLogs, setWorkoutLogs] = useState([]);
 
   useEffect(() => {
-      console.log("verifying");
-      const verifyUser = async () => {
+      const getLogs = async() => {
         try {
-          const _ = await axios.get("http://localhost:5000/api/verify", {
-          withCredentials: true
-        });
-        console.log("user verified");
-        } catch (e) {
+          const response = await axios.get(`http://localhost:5000/api/logs/${date.toISOString()}`, {
+            withCredentials: true
+          });
+          console.log(response);
+          setWorkoutLogs(response.data);
+        } catch (error) {
+          console.error(error);
+          if (error.response?.status === 403 || error.response?.status === 401) {
+            navigate("/login");
+          }
           // toast
-          console.log(e);
-        navigate("/login");
-        }      
+        }
       }
-      verifyUser();
-    }, []);
+      getLogs();
+    }, [date]);
 
   const handleDateChange = (date) => {
     setDate(date);
     console.log('Selected date:', date);
   };
 
-  const handleDelete = (logId) => {
+  const handleDelete = async (logId) => {
     if (window.confirm('Are you sure you want to delete this workout log?')) {
-      setWorkoutLogs(workoutLogs.filter(log => log._id !== logId));
+      try{
+        const response = await axios.delete(`http://localhost:5000/api/logs/${logId}`, {
+          withCredentials: true
+        });
+        setWorkoutLogs(workoutLogs.filter(log => log._id !== logId));
+      } catch (error) {
+        console.error(error);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          navigate("/login");
+        }
+        // toast
+      }
     }
   };
 
-  const handleEdit = (logId) => {
+  const handleEdit = (_) => {
     console.log('Editing log');
     // Endpoint to be implemented sometime in the future
   };
