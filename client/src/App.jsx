@@ -6,7 +6,7 @@ import CreateLog from './pages/CreateLog'
 import HomePage from './pages/HomePage'
 
 const App = () => {
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date());
 
   return (
     <div>
@@ -14,8 +14,8 @@ const App = () => {
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Navigate to="/" replace />} />
-            <Route path="/create" element={<CreateLog />} />
-            <Route path = "/home" element={<HomePage />} />
+            <Route path="/create" element={<CreateLog date={date}/>} />
+            <Route path = "/home" element={<HomePage date={date} setDate={setDate}/>} />
         </Routes>
     </div>
   )

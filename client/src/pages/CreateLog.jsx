@@ -1,12 +1,36 @@
 import React from 'react'
 import {ArrowLeft} from 'lucide-react'
 import {Link} from 'react-router'
+import axios from 'axios'
 
 const CreateLog = ({date}) => {
 
   console.log(`${date}`);
+  date = new Date();
 
-  function onCreateLog(formData) {
+  async function onCreateLog(formData) {
+    const exercise = formData.get("exercise");
+    const sets = parseInt(formData.get("sets")) || 0;
+    const reps = parseInt(formData.get("reps")) || 0;
+    const comments = formData.get("comments");
+    const isoDate = date.toISOString();
+    const requestBody = {exercise,sets,reps,comments, date: isoDate}
+    try {
+      const response = await axios.post("localhost:5000/api/logs", requestBody, {
+        withCredentials: true
+      });
+      if (response.status === 201) {
+          // toast success
+          
+        } else if (response.status === 429) {
+          // toast too many reqs
+        } else {
+          // toast error
+        }
+    } catch (error) {
+      console.log(error);
+      // toast error
+    }
     return;
   }
 
@@ -26,7 +50,7 @@ const CreateLog = ({date}) => {
             <form action={onCreateLog}>
                 {/* Labels and inputs for form data */}
                 <label>Exercise</label>
-                <input type="text" name="exerciese" required/>
+                <input type="text" name="exercise" required/>
 
                 <label>Sets</label>
                 <input type="number" name="sets"/>
@@ -35,7 +59,7 @@ const CreateLog = ({date}) => {
                 <input type="number" name="reps"/>
 
                 <label>Comments</label>
-                <textarea required></textarea>
+                <textarea name="comments"></textarea>
 
                 <button>Add Log</button>
             </form>

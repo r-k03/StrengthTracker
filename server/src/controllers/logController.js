@@ -26,7 +26,8 @@ async function deleteLog(req, res) {
 }
 
 async function addLog(req, res) {
-    const {id, exercise, sets, reps, comments, date} = req.body;
+    const {exercise, sets, reps, comments, date} = req.body;
+    const id = req.userID;
     const queryDate = new Date(date);
     try {
         const addedLog = await UserLog.create({userID: id, exercise, sets, reps, comments, date: queryDate});

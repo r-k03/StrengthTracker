@@ -37,13 +37,13 @@ const Register = () => {
             <form onSubmit={handleRegister}>
                 {/* Labels and inputs for form data */}
                 <label>Email: </label>
-                <input type="email" required/>
+                <input type="email" maxlength="254" required/>
 
                 <label>Password: </label>
-                <input type="password" required/>
+                <input type="password" maxlength="30" required/>
 
                 <label>Re-Enter Password: </label>
-                <input type="password" name="dupPassword" required/>
+                <input type="password" name="dupPassword" maxLength="30" required/>
 
                 <button>Register</button>
             </form>

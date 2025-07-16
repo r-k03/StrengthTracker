@@ -168,3 +168,242 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.home-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #242424;
+  color: #F5F5F5;
+}
+
+.home-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.workout-logs-section {
+  flex: 2;
+  background: #141212;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(20, 18, 18, 0.3);
+  border: 1px solid #646CFF;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h1 {
+  margin: 0;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #F5F5F5;
+  color: #141212;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background: #646CFF;
+  color: #FFFFFF;
+}
+
+.add-btn:active {
+  transform: translateY(1px);
+}
+
+.column-headers {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 3fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  background: #242424;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #F5F5F5;
+  border: 1px solid #242424;
+}
+
+.workout-logs-list {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.workout-log-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 3fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #242424;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.workout-log-item:hover {
+  background: #242424;
+}
+
+.log-exercise {
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.log-sets, .log-reps {
+  text-indent: 10% ;
+  color: #F5F5F5;
+}
+
+.log-comments {
+  color: #F5F5F5;
+  font-size: 0.9rem;
+}
+
+.log-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border: 1px solid;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.edit-btn {
+  background: #242424;;
+  color: #F5F5F5;
+  border-color: #646CFF;
+}
+
+.edit-btn:hover {
+  background: #646CFF;
+  color: #FFFFFF;
+  border-color: #646CFF;
+}
+
+.delete-btn {
+  background: #242424;
+  color: #F5F5F5;
+  border-color: #646CFF;
+}
+
+.delete-btn:hover {
+  background: #e57373;
+  color: #FFFFFF;
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+}
+
+.no-logs {
+  text-align: center;
+  padding: 2rem;
+  color: #F5F5F5;
+}
+
+.calendar-section {
+  flex: 1;
+  background: #141212;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(20, 18, 18, 0.3);
+  border: 1px solid #646CFF;
+  height: fit-content;
+}
+
+.calendar-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.workout-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  background-color: #242424;
+  color: #F5F5F5;
+  border-radius: 8px;
+}
+
+/* Override react-calendar styles for dark theme */
+.react-calendar {
+  background: #242424;
+  color: #F5F5F5;
+  border: 1px solid #242424;
+}
+
+.react-calendar__navigation button {
+  background: #242424;
+  color: #F5F5F5;
+  border: none;
+}
+
+.react-calendar__navigation button:hover {
+  background: #646CFF;
+  color: #FFFFFF;
+}
+
+.react-calendar__month-view__weekdays {
+  color: #F5F5F5;
+}
+
+.react-calendar__tile {
+  background: #242424;
+  color: #F5F5F5;
+  border: 1px solid #141212;
+}
+
+.react-calendar__tile:hover {
+  background: #646CFF;
+  color: #FFFFFF;
+}
+
+.react-calendar__tile--active {
+  background: #646CFF !important;
+  color: #FFFFFF !important;
+}
+
+.react-calendar__tile--now:hover {
+  background: #646CFF;
+  color: #FFFFFF;
+}
+
+.selected-date-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #242424;
+  border-radius: 8px;
+  border: 1px solid #242424;
+}
+
+.selected-date-info p {
+  margin: 0;
+  color: #F5F5F5;
+  font-weight: 500;
+}
