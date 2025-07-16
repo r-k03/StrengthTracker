@@ -29,6 +29,7 @@ async function addLog(req, res) {
     const {exercise, sets, reps, comments, date} = req.body;
     const id = req.userID;
     const queryDate = new Date(date);
+    queryDate.setHours(0,0,0,0);
     try {
         const addedLog = await UserLog.create({userID: id, exercise, sets, reps, comments, date: queryDate});
         return res.status(201).json({message: "Log Created"});
