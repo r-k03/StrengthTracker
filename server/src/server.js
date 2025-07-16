@@ -12,7 +12,9 @@ const rateLimiter = require('./middleware/rateLimiter.js');
 const accountRouter = require('./routes/accountsRouter.js');
 const logRouter = require('./routes/logRouter.js');
 
-// app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 
 // Parsing Middleware
 app.use(cookieParser());
