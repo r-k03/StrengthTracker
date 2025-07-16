@@ -20,6 +20,7 @@ const Register = () => {
         const response = await axios.post("localhost:5000/api/account/register", requestBody, {
             withCredentials: true
         });
+        event.reset();
         if (response.status === 201) {
             navigate('/login');
         }
