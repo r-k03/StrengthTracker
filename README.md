@@ -9,13 +9,12 @@ A full-stack fitness application that allows users to record their workout logs 
 - **User Authentication**: Secure JWT-based session management
 - **Password Security**: Bcrypt hashing for secure password storage
 - **Rate Limiting**: API protection against abuse and spam
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
 
 ## Tech Stack
 
 ### Frontend
-- **React** - User interface library
-- **JavaScript/JSX** - Frontend logic and components
+- **React** - Component-based UI framework with JSX syntax
+- **CSS** - Styling and responsive layout design
 
 ### Backend
 - **Node.js** - Runtime environment
