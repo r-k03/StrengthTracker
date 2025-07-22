@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import {ArrowLeft} from 'lucide-react'
 import {Link, useNavigate} from 'react-router'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const CreateLog = ({date}) => {
 
@@ -9,6 +10,7 @@ const CreateLog = ({date}) => {
   const navigate = useNavigate();
 
 
+ // Hook to validate user's jwt session
   useEffect(() => {
     console.log("verifying");
     const verifyUser = async () => {
@@ -18,13 +20,14 @@ const CreateLog = ({date}) => {
       });
       console.log("user verified");
       } catch {
-        // toast
+        toast.error("Unauthorized Access");
       navigate("/login");
       }      
     }
     verifyUser();
   }, []);
 
+  // Function that creates a log entry in the database - Navigate to home after success
   async function onCreateLog(formData) {
     const exercise = formData.get("exercise");
     const sets = parseInt(formData.get("sets")) || 0;
@@ -37,21 +40,21 @@ const CreateLog = ({date}) => {
         withCredentials: true
       });
       if (response.status === 201) {
-          // toast success
-          
-        } else if (response.status === 429) {
-          // toast too many reqs
-        } else {
-          // toast error
+          toast.success("Log Creation Successful");          
         }
     } catch (error) {
       console.log(error);
-      // toast error
+      if (error.response?.status === 429) {
+          toast.error("Slow Down! Too Many Requests");
+        } else {
+          toast.error("Unexpected Error! Try Again Later");
+        }
     }
 
     navigate("/home");
   }
 
+  // Create Log Form
   return (
     <>
     <div style={{padding: "1rem", alignItems: "center", display:"flex"}}>

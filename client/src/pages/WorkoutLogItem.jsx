@@ -2,6 +2,7 @@ import { Edit, Trash2 } from 'lucide-react';
 
 // Sample workout log item component
 const WorkoutLogItem = ({ log, onEdit, onDelete }) => {
+  // Component To Represent a Workout Log
   return (
     <div className="workout-log-item">
       <div className="log-exercise">{log.exercise}</div>

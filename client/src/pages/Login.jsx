@@ -1,10 +1,12 @@
 import axios from "axios"
 import { useNavigate, Link } from "react-router"
+import toast from "react-hot-toast";
 
 function Login(){
 
     const navigate = useNavigate()
 
+    // Send Login Info to Server and Navigate to Home Page on Success
     async function handleLogin(formData){
         try {
             const email = formData.get("email");
@@ -17,13 +19,17 @@ function Login(){
             if (response.status === 200) {
                 navigate('/home');
             }
-            // Toast Warning
         } catch (error) {
             console.log(error);
-            // Toast Warning unexpected error
+            if (error.response?.status === 429) {
+                toast.error("Slow Down! Too Many Requests");
+                return;
+            }
+            toast.error("Error Logging In! Try Again Later");
         }
     }
 
+    // Login Form
     return (
         <div className="form">
             <form action={handleLogin}>

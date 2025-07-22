@@ -4,13 +4,15 @@ import Calendar from 'react-calendar'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
 import WorkoutLogItem from './WorkoutLogItem'
+import toast from 'react-hot-toast'
 
 const HomePage = ({date, setDate}) => {
   const navigate = useNavigate();
   
-  // Sample workout logs data
+  // Workout logs data
   const [workoutLogs, setWorkoutLogs] = useState([]);
 
+  // Run on first page render and every date change to fetch all added workout logs of the selected day
   useEffect(() => {
       const getLogs = async() => {
         try {
@@ -22,19 +24,23 @@ const HomePage = ({date, setDate}) => {
         } catch (error) {
           console.error(error);
           if (error.response?.status === 403 || error.response?.status === 401) {
+            toast.error("Unauthorized Access");
             navigate("/login");
+            return;
           }
-          // toast
+          toast.error("Error Fetching Logs! Try Again Later");
         }
       }
       getLogs();
     }, [date]);
 
-  const handleDateChange = (date) => {
+  // Triggers parent component re-render
+    const handleDateChange = (date) => {
     setDate(date);
     console.log('Selected date:', date);
   };
 
+  // Delete the workout log component from the array and send a delete req to the backend database
   const handleDelete = async (logId) => {
     if (window.confirm('Are you sure you want to delete this workout log?')) {
       try{
@@ -47,7 +53,7 @@ const HomePage = ({date, setDate}) => {
         if (error.response?.status === 401 || error.response?.status === 403) {
           navigate("/login");
         }
-        // toast
+        toast.error("Error Deleting Log! Try Again Later");
       }
     }
   };

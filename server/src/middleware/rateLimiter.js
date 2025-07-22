@@ -2,7 +2,7 @@ const rateLimit = require('../config/upstash');
 
 async function rateLimiter(req, res, next) {
     try {
-        const {success} = await rateLimit.limit(req.userID);
+        const {success} = await rateLimit.limit(req.userID || req.body.email);
         if (!success) {
             return res.status(429).json({message: "Too Many Requests"});
         }
