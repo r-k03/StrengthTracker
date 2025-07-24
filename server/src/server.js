@@ -3,7 +3,7 @@ const app = express();
 
 const cors = require('cors');
 const connectDB = require('./config/connectdb.js');
-env = require("dotenv");
+const env = require("dotenv");
 const cookieParser = require('cookie-parser');
 env.config();
 
