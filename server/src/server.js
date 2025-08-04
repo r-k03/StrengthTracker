@@ -23,6 +23,7 @@ app.use(express.json());
 
 // Route-Specific Middleware + Routes
 app.use('/api/logs', verifyToken);
+app.use('/api/verify', verifyToken);
 app.use(rateLimiter);
 app.use('/api/logs',logRouter);
 app.use('/api/account', accountRouter);
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
     res.status(200).send("Yello");
 });
 
-app.get('/api/verify', verifyToken, (req, res) => {
+app.get('/api/verify', (req, res) => {
     return res.status(200).json({message:"User Verified"});
 });
 
