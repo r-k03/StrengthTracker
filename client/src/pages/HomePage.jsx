@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import {Plus} from 'lucide-react'
 import Calendar from 'react-calendar'
 import axios from 'axios'
@@ -14,10 +14,12 @@ const HomePage = ({date, setDate}) => {
 
   // Run on first page render and every date change to fetch all added workout logs of the selected day
   useEffect(() => {
+    const controller = new AbortController();
       const getLogs = async() => {
         try {
           const response = await axios.get(`http://localhost:5000/api/logs/${date.toISOString()}`, {
-            withCredentials: true
+            withCredentials: true,
+            signal: controller.signal
           });
           console.log(response);
           setWorkoutLogs(response.data);
@@ -32,12 +34,18 @@ const HomePage = ({date, setDate}) => {
         }
       }
       getLogs();
-    }, [date]);
+
+      return () => {
+        console.log("Aborting");
+        controller.abort();
+      }
+    }, [date, navigate]);
 
   // Triggers parent component re-render
-    const handleDateChange = (date) => {
-    setDate(date);
-    console.log('Selected date:', date);
+    const handleDateChange = (newDate) => {
+    if (date.getTime() === newDate.getTime()) return;
+    setDate(newDate);
+    console.log('Selected date:', newDate);
   };
 
   // Delete the workout log component from the array and send a delete req to the backend database
